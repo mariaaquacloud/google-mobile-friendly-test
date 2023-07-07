@@ -5,10 +5,10 @@ on:
     branches: [ "main" ]
 
 env:
-  CHUNK_SIZE: ${{ env.CHUNK_SIZE }}
+  CHUNK_SIZE: ${{ vars.CHUNK_SIZE }}
   GOOGLE_AUTH_TOKEN: ${{ secrets.GOOGLE_AUTH_TOKEN }}
   GOOGLE_SPREADSHEET_ID: ${{ secrets.GOOGLE_SPREADSHEET_ID }}
-  GOOGLE_SPREADSHEET_RANGE: ${{ env.GOOGLE_SPREADSHEET_RANGE }}
+  GOOGLE_SPREADSHEET_RANGE: ${{ vars.GOOGLE_SPREADSHEET_RANGE }}
 
 jobs:
   build:
