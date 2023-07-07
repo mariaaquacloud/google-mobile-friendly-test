@@ -3,19 +3,19 @@ import {searchconsole_v1 as searchconsole} from 'googleapis';
 
 export class GoogleSearchConsoleService {
   private client: Promise<searchconsole.Searchconsole>;
-  private apiKey: string;
 
   private auth = new google.auth.GoogleAuth({
     scopes: ['https://www.googleapis.com/auth/cloud-platform'],
   });
 
   constructor(apiKey: string) {
-    this.apiKey = apiKey;
-    this.client = this.getClient();
+    this.client = this.getClient(apiKey);
   }
 
-  private async getClient(): Promise<searchconsole.Searchconsole> {
-    const authClient = this.auth.fromAPIKey(this.apiKey);
+  private async getClient(
+    apiKey: string
+  ): Promise<searchconsole.Searchconsole> {
+    const authClient = this.auth.fromAPIKey(apiKey);
     google.options({auth: authClient});
 
     return google.searchconsole({version: 'v1'});

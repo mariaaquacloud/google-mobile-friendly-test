@@ -3,19 +3,17 @@ import {sheets_v4 as sheets} from 'googleapis';
 
 export class GoogleSheetsService {
   private client: Promise<sheets.Sheets>;
-  private apiKey: string;
 
   private auth = new google.auth.GoogleAuth({
     scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'],
   });
 
   constructor(apiKey: string) {
-    this.apiKey = apiKey;
-    this.client = this.getClient();
+    this.client = this.getClient(apiKey);
   }
 
-  private async getClient(): Promise<sheets.Sheets> {
-    const authClient = this.auth.fromAPIKey(this.apiKey);
+  private async getClient(apiKey: string): Promise<sheets.Sheets> {
+    const authClient = this.auth.fromAPIKey(apiKey);
     google.options({auth: authClient});
 
     return google.sheets({version: 'v4'});
