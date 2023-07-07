@@ -1,0 +1,25 @@
+name: run
+
+on:
+  push:
+    branches: [ "main" ]
+
+env:
+  CHUNK_SIZE: ${{ env.CHUNK_SIZE }}
+  GOOGLE_AUTH_TOKEN: ${{ secrets.GOOGLE_AUTH_TOKEN }}
+  GOOGLE_SPREADSHEET_ID: ${{ secrets.GOOGLE_SPREADSHEET_ID }}
+  GOOGLE_SPREADSHEET_RANGE: ${{ env.GOOGLE_SPREADSHEET_RANGE }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - run: npm ci
+      - run: npm run build --if-present
+      - run: npm run start --if-present
