@@ -1,8 +1,6 @@
 name: run
 
-on:
-  push:
-    branches: [ "main" ]
+on: workflow_dispatch
 
 env:
   CHUNK_SIZE: ${{ vars.CHUNK_SIZE }}
